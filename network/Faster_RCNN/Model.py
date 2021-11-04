@@ -40,7 +40,7 @@ from .backbones import vgg16_backbone, res101_backbone
 from .frcnn.backbone_utils import resnet_fpn_backbone
 
 class Model(BaseModel):
-    def __init__(self, opt):
+    def __init__(self, opt, logger=None):
         super(Model, self).__init__()
         self.opt = opt
 
@@ -110,7 +110,7 @@ class Model(BaseModel):
             label += 1.  # effdet的label从1开始
 
         image, bboxes, labels = sample['image'], sample['bboxes'], sample['labels']
-        
+
         if len(bboxes[0]) == 0:  # 没有bbox，不更新参数
             return {}
 
